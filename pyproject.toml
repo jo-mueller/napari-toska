@@ -32,6 +32,7 @@ dependencies = [
     "magicgui",
     "qtpy",
     "scikit-image>=0.21.0",
+    "napari-skimage-regionprops",
     "networkx",
     "scipy",
     "magicgui>=0.4.0",
