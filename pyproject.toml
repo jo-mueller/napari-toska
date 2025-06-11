@@ -1,13 +1,83 @@
+[project]
+name = "napari-toska"
+dynamic = ["version"]
+description = "Extracts and analyses topological skeletons as undirected graphs"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Allyson Quinn Ryan", email = "allyson_quinn.ryan@tu-dresden.de"},
+    {name = "Johannes Soltwedel", email = "johannes_richard.soltwedel@tu-dresden.de"},
+]
+keywords = ["network-analysis", "skeletons", "napari", "napari-plugin"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Framework :: napari",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "magicgui",
+    "qtpy",
+    "scikit-image>=0.21.0",
+    "napari-skimage-regionprops",
+    "networkx",
+    "scipy",
+    "magicgui>=0.4.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+testing = [
+    "tox",
+    "pytest",  # https://docs.pytest.org/en/latest/contents.html
+    "pytest-cov",  # https://pytest-cov.readthedocs.io/en/latest/
+    "pytest-qt",  # https://pytest-qt.readthedocs.io/en/latest/
+    "napari",
+    "pyqt5",
+]
+
+[project.entry-points."napari.manifest"]
+"napari-toska" = "napari_toska:napari.yaml"
+
+[project.urls]
+"Bug Tracker" = "https://github.com/allysonryan/napari-toska/issues"
+"Documentation" = "https://github.com/allysonryan/napari-toska"
+"Source Code" = "https://github.com/allysonryan/napari-toska"
+"User Support" = "https://github.com/allysonryan/napari-toska/issues"
+
 [build-system]
-requires = ["setuptools>=42.0.0", "wheel"]
+requires = ["setuptools>=42.0.0", "wheel", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools_scm]
+write_to = "src/napari_toska/_version.py"
+fallback_version = "0.0.1+nogit"
 
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.black]
 line-length = 79
-target-version = ['py38', 'py39', 'py310']
-
+target-version = ['py39', 'py310']
 
 [tool.ruff]
 line-length = 79
@@ -52,5 +122,5 @@ exclude = [
     "*_vendor*",
 ]
 
-target-version = "py38"
+target-version = "py39"
 fix = true
