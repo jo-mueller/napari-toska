@@ -128,12 +128,14 @@ class ToskaSkeleton(Labels):
             'object_type': object_types,
         })
 
-        # add skeleton ID to features
+        # add skeleton ID to features as a categorical column
         for i, row in self.features.iterrows():
             self.features.loc[i, 'skeleton_id'] = labelled_skeletons[self.data == row['label']][0]
 
-        # make column type int
-        self.features['skeleton_id'] = self.features['skeleton_id'].astype(int)
+        # make column type categorical
+        self.features['skeleton_id'] = self.features['skeleton_id'].astype('category')
+        self.features['object_type'] = self.features['object_type'].astype('category')
+        self.features['label'] = self.features['label'].astype('category')
 
         return
     
@@ -295,6 +297,9 @@ class ToskaSkeleton(Labels):
             
             for label in longest_shortest_path['edge_labels']:
                 self.features.loc[self.features['label'] == label, 'spine'] = 1
+
+        # make spine column categorical
+        self.features['spine'] = self.features['spine'].astype('category')
                 
     def _graph_summary(self):
         """
